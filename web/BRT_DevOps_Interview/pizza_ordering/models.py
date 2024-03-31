@@ -12,7 +12,7 @@ class Order(models.Model):
     ]
     
     # Fields
-    comment = models.TextField(max_length=300, blank=True)
+    comment = models.TextField(max_length=300, blank=True, default='No Comment')
     pizza_type = models.CharField( choices=TOPPING_CHOICES, default='Plain')
     
     
