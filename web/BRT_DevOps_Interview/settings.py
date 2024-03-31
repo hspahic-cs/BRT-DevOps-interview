@@ -28,7 +28,6 @@ DEBUG = environ.get('DEBUG') == '1'
 
 ALLOWED_HOSTS = ['localhost']
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -85,7 +84,7 @@ DATABASES = {
 
 # Read database configuration from environment variables
 DB_NAME = environ.get('POSTGRES_DB')
-DB_USERNAME = environ.get('POSTGRES_USERNAME')
+DB_USERNAME = environ.get('POSTGRES_USER')
 DB_PASSWORD = environ.get('POSTGRES_PASSWORD')
 DB_HOST = environ.get('POSTGRES_HOST')
 DB_PORT = environ.get('POSTGRES_PORT')
