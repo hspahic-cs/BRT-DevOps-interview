@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order History Page</title>
+</head>
+<body>
+    <h1>Order History</h1>
+    {% if orders %}
+    <table>
+            {% for order in orders %}
+            <tr>
+                <th>{{order.pizza_type}}</th>
+                <th>{{order.comment}}</th>
+            </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+        <p>No orders found.</p>
+    {% endif %}
+    <br>
+    <a href="{% url 'order_page' %}">Order Pizza</a>
+</body>
+</html>
