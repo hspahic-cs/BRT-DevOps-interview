@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+from os import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,10 +21,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-eg_r5iwlp+%b&m-@*_g6p_&ami@6evx9@59vic^!re)r8nx!mz'
+SECRET_KEY = environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = environ.get('DEBUG') == '1'
 
 ALLOWED_HOSTS = []
 
@@ -80,6 +81,32 @@ DATABASES = {
     }
 }
 
+
+# Read database configuration from environment variables
+DB_NAME = environ.get('POSTGRES_DB')
+DB_USERNAME = environ.get('POSTGRES_USERNAME')
+DB_PASSWORD = environ.get('POSTGRES_PASSWORD')
+DB_HOST = environ.get('POSTGRES_HOST')
+DB_PORT = environ.get('POSTGRES_PORT')
+
+# Check if all environment variables are available
+DB_AVAILABLE = all(
+    [DB_NAME, DB_USERNAME, DB_PASSWORD, DB_HOST, DB_PORT]
+)
+
+# If DB is avaialble, use it
+if DB_AVAILABLE:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': DB_NAME,
+            'USER': DB_USERNAME,
+            'PASSWORD': DB_PASSWORD,
+            'HOST': DB_HOST,
+            'PORT': DB_PORT,
+        }
+    }
+    print('Database configuration loaded from environment variables')
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
