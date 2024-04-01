@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    name: app
+  name: app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: app
+  template:
+    metadata:
+      labels:
+        name: app
+    spec:
+      containers:
+      - name: gunicorn
+        image: brt_devops_interview:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        envFrom:
+        - secretRef:
+            name: django-secrets
+        - configMapRef:
+            name: django-config
+      volumes:
+      - name: staticfiles
+        emptyDir: {} ## we do not supply any further requirements for the emptyDir

@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+      - name: postgresdb
+        image: postgres
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 5432
+        env:
+        - name: POSTGRES_DB
+          valueFrom:
+            secretKeyRef:
+              key: database
+              name: postgres-secrets
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              key: username
+              name: postgres-secrets
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: password
+              name: postgres-secrets
+        volumeMounts: # This is correctly placed inside the container definition
+        - mountPath: /var/lib/postgresql/data
+          name: postgres-storage
+        - mountPath: /etc/postgres-secrets
+          name: postgres-secrets
+          readOnly: true
+      volumes: # This should be directly under spec.template.spec
+      - name: postgres-storage
+        persistentVolumeClaim:
+          claimName: postgres-pvc
+      - name: postgres-secrets
+        secret:
+          secretName: postgres-secrets
