@@ -132,8 +132,8 @@ kubectl apply -f application/jobs.yaml
 
 Make sure to test the deployments and jobs to see if they were deployed correctly. You can do this using the, 
 ```bash
-minikube get deployments
-minikube get jobs
+kubectl get deployments
+kubectl get jobs
 ``` 
 commands, or through the minikube dashboard.
 
