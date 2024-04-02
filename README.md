@@ -102,7 +102,7 @@ or
 minikube dashboard
 ```
 
-#### STEP 5.1: Adjusting Postgres Host
+### STEP 5.1: Adjusting Postgres Host
 
 Before we continue, we need to change the .../kubernetes/application/configmap.yaml file in order to have our application
 properly connect to the postgres database. 
@@ -111,7 +111,7 @@ Look at the output of *kubectl get services* and look for the *ip* of the *djang
 Go into the .../kubernetes/application/configmap.yaml and change the *POSTGRES_HOST* variable to be
 the new *ip*.
 
-#### STEP 5.2: Continue Deployment
+### STEP 5.2: Continue Deployment
 
 Run the following. We'll start with applying the new ip from the configmap file. Then we can send out
 our application and database deployment. Once those are done, we'll schedule a job to migrate our database
