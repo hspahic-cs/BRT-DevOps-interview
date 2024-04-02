@@ -1,0 +1,26 @@
+================ DUMMY ENVIRONMENT VARIABLES FOR LOCAL TESTING ====================
+
+# Debugging options
+DEBUG=
+
+# Django Admin Settings
+DJANGO_SUPERUSER_USERNAME=
+DJANGO_SUPERUSER_PASSWORD=
+DJANGO_SUPERUSER_EMAIL=
+
+# Database settings
+POSTGRES_DB=
+POSTGRES_USER=
+POSTGRES_PASSWORD=
+POSTGRES_HOST=
+# POSTGRES_HOST=
+POSTGRES_PORT=
+
+# Secret Key
+SECRET_KEY=
+
+
+================ IF YOU'D LIKE TO TEST LOCALLY, PLEASE UNCOMMENT THE FOLLOWING ====================
+
+BRT-DevOps-interview/web/manage.py ~ Line 5 & 22
+BRT-DevOps-interview/web/BRT_DevOps_Interview/wsgi.py ~ Line 10 & 20

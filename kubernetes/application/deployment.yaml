@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: django
+  labels:
+    app: django
+spec:
+  selector:
+    matchLabels:
+      name: django
+      tier: app
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        name: django
+        tier: app
+    spec:
+      volumes:
+      - name: django-app-data
+        persistentVolumeClaim:
+          claimName: django-app-pvc
+      - name: nginx-conf
+        configMap:
+          name: nginx-config
+      containers:
+      - name: app
+        imagePullPolicy: Never
+        image: brt_devops_interview:latest
+        ports:
+        - containerPort: 8080
+          name: app
+        volumeMounts:
+        - name: django-app-data
+          mountPath: /vol/web
+        envFrom:
+        - secretRef:
+            name: django-secrets
+        - configMapRef:
+            name: django-config
+      - name: proxy
+        image: django-proxy:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8000
+          name: proxy
+        volumeMounts:
+        - name: django-app-data
+          mountPath: /vol/web
+        env:
+        - name: APP_HOST
+          value: '127.0.0.1'
+        - name: APP_PORT
+          value: '8080'

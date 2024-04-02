@@ -1,0 +1,22 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: django-migrate
+  labels:
+    name: django-migrate
+    tier: app
+spec:
+  template:
+    spec:
+      containers:
+      - name: migrations
+        image: brt_devops_interview:latest
+        imagePullPolicy: Never
+        command: ["sh", "/app/migrate.sh"]
+        envFrom:
+        - secretRef:
+            name: django-secrets
+        - configMapRef:
+            name: django-config
+      restartPolicy: Never
+  backoffLimit: 4

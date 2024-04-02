@@ -26,8 +26,7 @@ SECRET_KEY = environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = environ.get('DEBUG') == '1'
 
-ALLOWED_HOSTS = ['localhost']
-
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 # Application definition
 
@@ -85,7 +84,7 @@ DATABASES = {
 
 # Read database configuration from environment variables
 DB_NAME = environ.get('POSTGRES_DB')
-DB_USERNAME = environ.get('POSTGRES_USERNAME')
+DB_USERNAME = environ.get('POSTGRES_USER')
 DB_PASSWORD = environ.get('POSTGRES_PASSWORD')
 DB_HOST = environ.get('POSTGRES_HOST')
 DB_PORT = environ.get('POSTGRES_PORT')
