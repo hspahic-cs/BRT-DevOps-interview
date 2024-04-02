@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: django-config
 data:
-  DEBUG: '0'
+  DEBUG: '1'
   POSTGRES_DB: 'django_pizza_db'
-  POSTGRES_HOST: '10.103.38.105'
+  POSTGRES_HOST: '10.97.197.203'
   POSTGRES_PORT: '5432'

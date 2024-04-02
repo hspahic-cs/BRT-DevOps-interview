@@ -2,22 +2,35 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: postgres
+  labels:
+    app: django-postgres
 spec:
-  replicas: 1
   selector:
     matchLabels:
-      app: postgres
+      app: django
+      tier: postgres
   template:
     metadata:
       labels:
-        app: postgres
+        app: django
+        tier: postgres
     spec:
+      volumes:
+      - name: postgres-data
+        persistentVolumeClaim:
+          claimName: django-postgres-pvc
+      - name: postgres-secrets
+        secret:
+          secretName: postgres-secrets
       containers:
-      - name: postgresdb
-        image: postgres
-        imagePullPolicy: IfNotPresent
+      - image: postgres
+        name: postgres
         ports:
         - containerPort: 5432
+          name: postgres
+        volumeMounts:
+        - name: postgres-data
+          mountPath: /var/lib/postgresql/data
         env:
         - name: POSTGRES_DB
           valueFrom:
@@ -34,16 +47,3 @@ spec:
             secretKeyRef:
               key: password
               name: postgres-secrets
-        volumeMounts: # This is correctly placed inside the container definition
-        - mountPath: /var/lib/postgresql/data
-          name: postgres-storage
-        - mountPath: /etc/postgres-secrets
-          name: postgres-secrets
-          readOnly: true
-      volumes: # This should be directly under spec.template.spec
-      - name: postgres-storage
-        persistentVolumeClaim:
-          claimName: postgres-pvc
-      - name: postgres-secrets
-        secret:
-          secretName: postgres-secrets
