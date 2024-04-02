@@ -117,6 +117,9 @@ Run the following. We'll start with applying the new ip from the configmap file.
 our application and database deployment. Once those are done, we'll schedule a job to migrate our database
 and create a superuser for testing purposes.
 
+NOTE: superuser will NOT be created if database is not avaialable. Please wait for database to become
+available before deplying *application/deployment.yaml*
+
 ```bash
 kubectl apply -f application/configmap.yaml
 sleep 2  # Pause for 2 seconds
