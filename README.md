@@ -40,7 +40,7 @@ Minikube comes installed with its own Docker daemon. In order to make your
 Docker images accessible to the minikube cluster, we will point our terminal
 to the minikube's Docker daemon. 
 
-There are alternatives to this method, and for more details I'll I've provided
+There are alternatives to this method, and for more details I've provided
 documentation [here](https://minikube.sigs.k8s.io/docs/handbook/pushing/).
 
 ```bash
