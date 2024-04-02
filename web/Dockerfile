@@ -10,4 +10,4 @@ RUN pip install pip --upgrade && \
     chmod +x entrypoint.sh && \ 
     chmod +x migrate.sh
 
-CMD ["/app/migrate.sh && /app/entrypoint.sh"]
+CMD ["/app/entrypoint.sh"]

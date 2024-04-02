@@ -5,5 +5,5 @@ metadata:
 data:
   DEBUG: '1'
   POSTGRES_DB: 'django_pizza_db'
-  POSTGRES_HOST: '10.97.197.203'
+  POSTGRES_HOST: '10.99.108.224'
   POSTGRES_PORT: '5432'
