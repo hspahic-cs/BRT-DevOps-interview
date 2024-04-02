@@ -1,6 +1,4 @@
-# BRT-DevOps-interview
-
-# Kubernetes Application Deployment Guide
+# Kubernetes BRT-DevOps-interview Guide
 
 ## Introduction
 
